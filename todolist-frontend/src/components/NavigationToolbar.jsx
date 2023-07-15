@@ -9,16 +9,14 @@ const NavigationToolbar = ({ isLoggedIn }) => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        {isLoggedIn && (
-          <>
+       
             <li>
               <Link to="/todolist/new">Create To Do List</Link>
             </li>
             <li>
               <Link to="/profile">Profile</Link>
             </li>
-          </>
-        )}
+       
         <li>
           <Link to="/login">Login</Link>
         </li>
