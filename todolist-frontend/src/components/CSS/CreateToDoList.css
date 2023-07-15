@@ -63,6 +63,7 @@ li {
   align-items: center;
   margin-top: 10px;
   margin-left: 10px;
+  justify-content: space-evenly;
 }
 
 .todo-item-buttons button {
@@ -105,4 +106,13 @@ li {
 .edit-button {
   margin-right: 10px;
   margin-left: 10px;
+}
+
+.edit-button-completed {
+  margin-right: 10px;
+  margin-left: 200px !important;
+}
+
+.todo-item.completed {
+  background-color: green;
 }
