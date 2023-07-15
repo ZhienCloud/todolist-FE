@@ -5,7 +5,7 @@ import CreateToDoList from "../components/CreateToDoList";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import TaskList from "./TaskList";
-// import "./CSS/Profile.css";
+import "./CSS/Profile.css";
 
 export default function Profile() {
   const { logoutSuccess, user } = useContext(AuthContext);
@@ -44,8 +44,9 @@ export default function Profile() {
           <>
             <UserPicture user={user} />
             <div className="bio-details">
-              <h2>{user.name}</h2>
-              <p>{user.bio}</p>
+              <h2>User ID: {user.id}</h2>
+              <h2>Name: {user.username}</h2>
+              <h2>Email: {user.email}</h2>
             </div>
           </>
         )}
@@ -70,6 +71,21 @@ export default function Profile() {
           </div>
         )}
       </div>
+      <div>
+        <h2>Todo List:</h2>
+        <ul>
+          {todoList.map((todo) => (
+            <li key={todo._id || todo.id}>
+              <p>To-Do Item: {todo.toDoItem}</p>
+              <p>Details: {todo.details}</p>
+              <p>Deadline: {todo.deadline}</p>
+              <p>Priority: {todo.priority ? "Yes" : "No"}</p>
+              <p>Repeating: {todo.repeating ? "Yes" : "No"}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <button className="btn btn-danger" onClick={logoutSuccess}>
         Logout
       </button>

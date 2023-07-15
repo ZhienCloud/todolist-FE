@@ -1,23 +1,11 @@
 import React from "react";
-import axios from "axios";
 
-const DeleteButton = ({ todo, onDelete }) => {
-  const handleDelete = async () => {
-    try {
-      const response = await axios.delete(`/api/toDoItems/${todo.itemId}`);
-      if (response && response.status === 200) {
-        onDelete(todo);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+const DeleteButton = ({ itemId, onClick }) => {
+  const handleDelete = () => {
+    onClick(itemId);
   };
 
-  return (
-    <button onClick={handleDelete} className="btn btn-danger">
-      Delete
-    </button>
-  );
+  return <button onClick={handleDelete}>Delete</button>;
 };
 
 export default DeleteButton;

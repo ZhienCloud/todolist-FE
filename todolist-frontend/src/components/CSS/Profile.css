@@ -1,0 +1,61 @@
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    margin-top: 10%;
+  }
+  
+  .profile-left {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .profile-right {
+    flex: 2;
+  }
+  
+  .profile-left h2 {
+    margin-top: 0;
+  }
+  
+  .bio-details {
+    margin-top: 20px;
+  }
+  
+  .profile-right h3 {
+    margin-top: 0;
+  }
+  
+  .no-list {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .button {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+  }
+  
+  .btn-primary:hover,
+  .btn-danger:hover {
+    opacity: 0.8;
+  }

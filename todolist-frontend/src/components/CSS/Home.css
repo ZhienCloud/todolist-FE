@@ -1,5 +1,6 @@
 .home-container {
     text-align: center;
+    margin-top: 10%;
   }
   
   .button-container {
@@ -19,6 +20,7 @@
     border-radius: 4px;
     text-decoration: none;
     margin-bottom: 10px;
+    
   }
   
   .button:hover {

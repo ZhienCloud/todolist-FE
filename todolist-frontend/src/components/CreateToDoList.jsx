@@ -9,7 +9,7 @@ const CreateToDoList = () => {
   const [newTodo, setNewTodo] = useState({
     toDoItem: "",
     details: "",
-    createdBy:"",
+    createdBy: "",
     assignedTo: [],
     deadline: null,
     priority: false,
@@ -19,40 +19,46 @@ const CreateToDoList = () => {
   const [todoList, setTodoList] = useState([]);
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      fetchTodoList();
+    }
+  }, [user]);
+
   const fetchUser = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const response = await axios.get("http://localhost:3000/api/users/info", {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
       setUser(response.data);
-      await fetchTodoList(); // make sure fetchTodoList awaits setUser
     } catch (err) {
       console.error(err);
     }
   };
 
   const fetchTodoList = async () => {
-    if (user) { // only fetch todo list if user is set
-      try {
-        const response = await axios.get("http://localhost:3000/api/toDoItems");
-        if (response && response.status === 200 && response.data) {
-          const filteredData = response.data.filter(todo => todo.createdBy === user._id);
-          setTodoList(filteredData);
-        }
-      } catch (error) {
-        console.error(error);
+    try {
+      const response = await axios.get("http://localhost:3000/api/toDoItems", {
+        params: { createdBy: user._id }
+      });
+      if (response && response.status === 200 && response.data) {
+        const updatedList = response.data.filter(
+          (todo) => !todo.deleted // Exclude the deleted todos
+        );
+        setTodoList(updatedList);
       }
+    } catch (error) {
+      console.error(error);
     }
   };
-
-
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -112,35 +118,39 @@ const CreateToDoList = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.delete(
-        `http://localhost:3000/api/toDoItems/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
+      await axios.delete(`http://localhost:3000/api/toDoItems/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      setTodoList((prevTodoList) =>
+        prevTodoList.filter((todo) => todo._id !== id)
       );
-      console.log(response.data);
-      fetchTodoList();
     } catch (error) {
       console.log(error);
     }
   };
+  
+    
 
   const handleComplete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.patch(
+      const response = await axios.delete(
         `http://localhost:3000/api/toDoItems/${id}`,
-        { completed: true },
         {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
-      console.log(response.data);
-      fetchTodoList();
+
+      if (response.status === 200) {
+        setTodoList(todoList.filter((todo) => todo._id !== id));
+      } else {
+        console.log("Failed to delete the item.");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -152,44 +162,44 @@ const CreateToDoList = () => {
 
   return (
     <div>
-    <form className="todo-form" onSubmit={handleSubmit}>
-      <label>
-        To-Do Item:
-        <input
-          type="text"
-          name="toDoItem"
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Details:
-        <input type="text" name="details" onChange={handleChange} />
-      </label>
-      <label>
-        Deadline:
-        <input type="date" name="deadline" onChange={handleChange} required />
-      </label>
-      <label>
-        Priority:
-        <input
-          type="checkbox"
-          name="priority"
-          checked={newTodo.priority}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Repeating:
-        <input
-          type="checkbox"
-          name="repeating"
-          checked={newTodo.repeating}
-          onChange={handleChange}
-        />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+      <form className="todo-form" onSubmit={handleSubmit}>
+        <label>
+          To-Do Item:
+          <input
+            type="text"
+            name="toDoItem"
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Details:
+          <input type="text" name="details" onChange={handleChange} />
+        </label>
+        <label>
+          Deadline:
+          <input type="date" name="deadline" onChange={handleChange} required />
+        </label>
+        <label>
+          Priority:
+          <input
+            type="checkbox"
+            name="priority"
+            checked={newTodo.priority}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Repeating:
+          <input
+            type="checkbox"
+            name="repeating"
+            checked={newTodo.repeating}
+            onChange={handleChange}
+          />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
 
       <div>
         <h2>Todo List:</h2>
@@ -199,37 +209,21 @@ const CreateToDoList = () => {
               {editingTodoId === (todo._id || todo.id) ? (
                 <EditTodoItem
                   todo={todo}
-                  onSave={(updatedTodo) => handleSave(todo.id, updatedTodo)}
+                  onSave={(updatedTodo) => handleSave(todo._id, updatedTodo)}
                   onCancel={handleCancel}
                 />
               ) : (
                 <>
                   <p>To-Do Item: {todo.toDoItem}</p>
-                  <p>
-                    Createdby:{todo.createdBy}
-                    <span>{editingTodoId ? todo.details : "********"}</span>
-                  </p>
-                  <p>
-                    Deadline:{" "}
-                    <span>{editingTodoId ? todo.deadline : "********"}</span>
-                  </p>
-                  <p>
-                    Priority:{" "}
-                    <span>
-                      {editingTodoId ? (todo.priority ? "Yes" : "No") : "********"}
-                    </span>
-                  </p>
-                  <p>
-                    Repeating:{" "}
-                    <span>
-                      {editingTodoId ? (todo.repeating ? "Yes" : "No") : "********"}
-                    </span>
-                  </p>
-                  <button onClick={() => handleEdit(todo.id)}>Edit</button>
+                  <p>Details: {todo.details}</p>
+                  <p>Deadline: {todo.deadline}</p>
+                  <p>Priority: {todo.priority ? "Yes" : "No"}</p>
+                  <p>Repeating: {todo.repeating ? "Yes" : "No"}</p>
+                  <button onClick={() => handleEdit(todo._id || todo.id)}>Edit</button>
                 </>
               )}
-              <DeleteButton onClick={() => handleDelete(todo.id)} />
-              <CompleteButton onClick={() => handleComplete(todo.id)} />
+              <DeleteButton onClick={() => handleDelete(todo._id || todo.id)} />
+              <CompleteButton onClick={() => handleComplete(todo._id || todo.id)} />
             </li>
           ))}
         </ul>

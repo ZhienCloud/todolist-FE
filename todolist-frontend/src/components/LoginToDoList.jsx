@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/auth/AuthProvider";
+import "./CSS/LoginCSS.css"
 
 export default function Login() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function Login() {
       console.log(error);
     }
   };
-  
+
   return (
     <div className="container">
       <h2>Login</h2>
