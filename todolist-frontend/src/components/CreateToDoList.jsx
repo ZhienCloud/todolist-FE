@@ -9,6 +9,7 @@ const CreateToDoList = () => {
   const [newTodo, setNewTodo] = useState({
     toDoItem: "",
     details: "",
+    createdBy:"",
     assignedTo: [],
     deadline: null,
     priority: false,
@@ -17,22 +18,41 @@ const CreateToDoList = () => {
   const [submittedTodo, setSubmittedTodo] = useState(null);
   const [todoList, setTodoList] = useState([]);
   const [editingTodoId, setEditingTodoId] = useState(null);
-
+  const [user, setUser] = useState(null);
   useEffect(() => {
-    fetchTodoList();
+    fetchUser();
   }, []);
 
-  const fetchTodoList = async () => {
+  const fetchUser = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/toDoItems");
-
-      if (response && response.status === 200 && response.data) {
-        setTodoList(response.data);
-      }
-    } catch (error) {
-      console.error(error);
+      const token = localStorage.getItem('token');
+      const response = await axios.get("http://localhost:3000/api/users/info", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setUser(response.data);
+      await fetchTodoList(); // make sure fetchTodoList awaits setUser
+    } catch (err) {
+      console.error(err);
     }
   };
+
+  const fetchTodoList = async () => {
+    if (user) { // only fetch todo list if user is set
+      try {
+        const response = await axios.get("http://localhost:3000/api/toDoItems");
+        if (response && response.status === 200 && response.data) {
+          const filteredData = response.data.filter(todo => todo.createdBy === user._id);
+          setTodoList(filteredData);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -175,8 +195,8 @@ const CreateToDoList = () => {
         <h2>Todo List:</h2>
         <ul>
           {todoList.map((todo) => (
-            <li key={todo.id}>
-              {editingTodoId === todo.id ? (
+            <li key={todo._id || todo.id}>
+              {editingTodoId === (todo._id || todo.id) ? (
                 <EditTodoItem
                   todo={todo}
                   onSave={(updatedTodo) => handleSave(todo.id, updatedTodo)}
@@ -186,7 +206,7 @@ const CreateToDoList = () => {
                 <>
                   <p>To-Do Item: {todo.toDoItem}</p>
                   <p>
-                    Details:{" "}
+                    Createdby:{todo.createdBy}
                     <span>{editingTodoId ? todo.details : "********"}</span>
                   </p>
                   <p>

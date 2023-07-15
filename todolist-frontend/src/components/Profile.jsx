@@ -27,7 +27,7 @@ export default function Profile() {
     // Fetch user's to-do list
     const fetchTodoList = async () => {
       try {
-        const response = await axios.get("/api/toDoItems/myToDoItems");
+        const response = await axios.get("http://localhost:3000/api/toDoItems/myToDoItems");
         setTodoList(response.data);
       } catch (error) {
         console.error(error);
