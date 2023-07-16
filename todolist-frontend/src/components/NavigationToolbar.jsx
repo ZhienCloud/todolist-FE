@@ -13,9 +13,9 @@ const NavigationToolbar = ({ isLoggedIn }) => {
             <li>
               <Link to="/todolist/new">Create To Do List</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/profile">Profile</Link>
-            </li>
+            </li> */}
        
         <li>
           <Link to="/login">Login</Link>

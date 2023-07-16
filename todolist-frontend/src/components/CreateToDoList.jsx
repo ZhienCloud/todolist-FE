@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./CSS/CreateToDoList.css";
 import CompleteButton from "./CompleteButton";
 import DeleteButton from "./DeleteButton";
 import EditTodoItem from "./EditTodoItem";
+import LogoutButton from "./LogoutButton";
 
 const CreateToDoList = () => {
   const [newTodo, setNewTodo] = useState({
@@ -19,6 +21,7 @@ const CreateToDoList = () => {
   const [todoList, setTodoList] = useState([]);
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUser();
@@ -160,6 +163,7 @@ const CreateToDoList = () => {
     setEditingTodoId(null);
   };
 
+
   return (
     <div>
       <form className="todo-form" onSubmit={handleSubmit}>
@@ -201,7 +205,7 @@ const CreateToDoList = () => {
         <input type="submit" value="Submit" />
       </form>
 
-      <div>
+      <div className="to-do">
         <h2>Todo List:</h2>
         <ul>
           {todoList.map((todo) => (
@@ -219,15 +223,16 @@ const CreateToDoList = () => {
                   <p>Deadline: {todo.deadline}</p>
                   <p>Priority: {todo.priority ? "Yes" : "No"}</p>
                   <p>Repeating: {todo.repeating ? "Yes" : "No"}</p>
-                  <button onClick={() => handleEdit(todo._id || todo.id)}>Edit</button>
+                  <button className="edit-button" onClick={() => handleEdit(todo._id || todo.id)}>Edit</button>
                 </>
               )}
-              <DeleteButton onClick={() => handleDelete(todo._id || todo.id)} />
-              <CompleteButton onClick={() => handleComplete(todo._id || todo.id)} />
+              <DeleteButton className="delete-button" onClick={() => handleDelete(todo._id || todo.id)} />
+              <CompleteButton className="complete-button" onClick={() => handleComplete(todo._id || todo.id)} />
             </li>
           ))}
         </ul>
       </div>
+      <LogoutButton  />
     </div>
   );
 };

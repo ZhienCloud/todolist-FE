@@ -1,8 +1,81 @@
+.to-do {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.to-do h2 {
+  margin-bottom: 10px;
+}
+
+.to-do ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.to-do li {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.to-do li p {
+  margin: 5px 0;
+}
+
+.to-do li .edit-button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  background-color: #337ab7;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.to-do li .edit-button:hover {
+  background-color: #286090;
+}
+
+.to-do li .complete-button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  background-color: #5cb85c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.to-do li .complete-button:hover {
+  background-color: #449d44;
+}
+
+.to-do li .delete-button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.to-do li .delete-button:hover {
+  background-color: #c9302c;
+}
+
 .todo-form {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
-  margin: 10%;
+  max-width: 400px;
+  margin: 10% auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
 }
 
 .todo-form label {
@@ -26,4 +99,21 @@
 
 .todo-form input[type="submit"]:hover {
   background-color: #45a049;
+}
+
+.logout-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 8%;
+}
+
+.logout-button:hover {
+  background-color: darkred;
 }

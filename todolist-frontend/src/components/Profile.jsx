@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import { AuthContext } from "../components/auth/AuthProvider";
 import UserPicture from "../components/UserPicture";
 import CreateToDoList from "../components/CreateToDoList";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
-import TaskList from "./TaskList";
 import "./CSS/Profile.css";
 
-export default function Profile() {
+const Profile = () => {
   const { logoutSuccess, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -55,7 +54,20 @@ export default function Profile() {
         {user && todoList.length > 0 ? (
           <>
             <h3>My Todo List</h3>
-            <CreateToDoList todoList={todoList} />
+            <div className="to-do">
+              <h2>Todo List:</h2>
+              <ul>
+                {todoList.map((todo) => (
+                  <li key={todo._id || todo.id}>
+                    <p>To-Do Item: {todo.toDoItem}</p>
+                    <p>Details: {todo.details}</p>
+                    <p>Deadline: {todo.deadline}</p>
+                    <p>Priority: {todo.priority ? "Yes" : "No"}</p>
+                    <p>Repeating: {todo.repeating ? "Yes" : "No"}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <button className="btn btn-primary" onClick={handleAddToList}>
               Add to List
             </button>
@@ -71,24 +83,11 @@ export default function Profile() {
           </div>
         )}
       </div>
-      <div>
-        <h2>Todo List:</h2>
-        <ul>
-          {todoList.map((todo) => (
-            <li key={todo._id || todo.id}>
-              <p>To-Do Item: {todo.toDoItem}</p>
-              <p>Details: {todo.details}</p>
-              <p>Deadline: {todo.deadline}</p>
-              <p>Priority: {todo.priority ? "Yes" : "No"}</p>
-              <p>Repeating: {todo.repeating ? "Yes" : "No"}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <button className="btn btn-danger" onClick={logoutSuccess}>
         Logout
       </button>
     </div>
   );
-}
+};
+
+export default Profile;

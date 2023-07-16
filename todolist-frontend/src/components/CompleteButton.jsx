@@ -2,7 +2,7 @@ import React from "react";
 
 const CompleteButton = ({ onClick }) => {
   return (
-    <button onClick={onClick}>Complete</button>
+    <button className="complete-button" onClick={onClick}>Complete</button>
   );
 };
 

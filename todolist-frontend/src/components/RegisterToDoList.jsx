@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as yup from "yup";
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
-
+import "./CSS/Register.css"
 export default function Register() {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
