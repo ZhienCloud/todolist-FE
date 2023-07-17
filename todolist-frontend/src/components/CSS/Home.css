@@ -1,6 +1,6 @@
 .home-container {
     text-align: center;
-    margin-top: 10%;
+    margin: calc(5% + 10px) auto 0; 
   }
   
   .button-container {
