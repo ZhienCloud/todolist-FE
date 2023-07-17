@@ -14,7 +14,7 @@ const CreateToDoList = () => {
     createdBy: "",
     assignedTo: [],
     deadline: null,
-    priority: false,
+    priority: "",
     repeating: false
   });
   const [submittedTodo, setSubmittedTodo] = useState(null);
@@ -56,14 +56,16 @@ const CreateToDoList = () => {
         const updatedList = response.data.filter(
           (todo) => !todo.deleted // Exclude the deleted todos
         );
+        const sortedList = updatedList.sort((a, b) => a.priority - b.priority);
         setTodoList(updatedList);
+        setTodoList(sortedList);
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleChange = (e) => {
+   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const updatedValue = type === "checkbox" ? checked : value;
 
@@ -186,12 +188,18 @@ const CreateToDoList = () => {
         </label>
         <label>
           Priority:
-          <input
-            type="checkbox"
+          <select
             name="priority"
-            checked={newTodo.priority}
+            value={newTodo.priority}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select a priority</option>
+            {[1, 2, 3, 4, 5].map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           Repeating:
@@ -221,7 +229,7 @@ const CreateToDoList = () => {
                   <p>To-Do Item: {todo.toDoItem}</p>
                   <p>Details: {todo.details}</p>
                   <p>Deadline: {todo.deadline}</p>
-                  <p>Priority: {todo.priority ? "Yes" : "No"}</p>
+                  <p>Priority: {todo.priority}</p>
                   <p>Repeating: {todo.repeating ? "Yes" : "No"}</p>
                   <button className="edit-button" onClick={() => handleEdit(todo._id || todo.id)}>Edit</button>
                 </>
