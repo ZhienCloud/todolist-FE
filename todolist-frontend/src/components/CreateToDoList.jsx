@@ -49,7 +49,11 @@ const CreateToDoList = () => {
 
   const fetchTodoList = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/toDoItems/createdBy/${user.id}`);
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`http://localhost:3000/api/toDoItems/createdBy/${user.id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }});
       if (response && response.status === 200 && response.data) {
         const updatedList = response.data.filter(
           (todo) => !todo.deleted // Exclude the deleted todos
@@ -227,6 +231,7 @@ const CreateToDoList = () => {
                   <p>To-Do Item: {todo.toDoItem}</p>
                   <p>Details: {todo.details}</p>
                   <p>Deadline: {todo.deadline}</p>
+                  <p>CreatedBy: {todo.createdBy}</p>
                   <p>Priority: {todo.priority}</p>
                   <p>Repeating: {todo.repeating ? "Yes" : "No"}</p>
                   <button className="edit-button" onClick={() => handleEdit(todo._id || todo.id)}>Edit</button>
