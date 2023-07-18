@@ -34,7 +34,7 @@ const Home = () => {
         {
           user ? (
             <div>
-              <h2>User ID: {user.id}</h2>
+              {/* <h2>User ID: {user.id}</h2> */}
               <h2>Name: {user.username}</h2>
               <h2>Email: {user.email}</h2>
             </div>

@@ -232,7 +232,7 @@ const CreateToDoList = () => {
                 <>
                   <p>To-Do Item: {todo.toDoItem}</p>
                   <p>Details: {todo.details}</p>
-                  <p>CreatedBy: {todo.createdBy}</p>
+                  {/* <p>CreatedBy: {todo.createdBy}</p> */}
                   <p>Deadline: {new Date(todo.deadline).toLocaleDateString()}</p>
                   <p>Priority: {todo.priority}</p>
                   <p>Repeating: {String(todo.repeating)}</p>
