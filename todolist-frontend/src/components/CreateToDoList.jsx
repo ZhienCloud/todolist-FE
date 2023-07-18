@@ -15,13 +15,13 @@ const CreateToDoList = () => {
     assignedTo: [],
     deadline: null,
     priority: "",
-    repeating: false
+    repeating: false,
   });
   const [submittedTodo, setSubmittedTodo] = useState(null);
   const [todoList, setTodoList] = useState([]);
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     fetchUser();
@@ -67,16 +67,16 @@ const CreateToDoList = () => {
     }
   };
 
-   const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const updatedValue = type === "checkbox" ? checked : value;
+  
+    setNewTodo((prevTodo) => ({
+      ...prevTodo,
+      [name]: updatedValue,
+    }));
 
-    setNewTodo({
-      ...newTodo,
-      [name]: updatedValue
-    });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -166,6 +166,7 @@ const CreateToDoList = () => {
   const handleCancel = () => {
     setEditingTodoId(null);
   };
+  console.log(newTodo);
 
 
   return (
@@ -206,11 +207,12 @@ const CreateToDoList = () => {
         <label>
           Repeating:
           <input
-            type="checkbox"
-            name="repeating"
-            checked={newTodo.repeating}
-            onChange={handleChange}
-          />
+  type="checkbox"
+  name="repeating"
+  checked={newTodo.repeating}
+  onChange={handleChange}
+/>
+
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -230,10 +232,10 @@ const CreateToDoList = () => {
                 <>
                   <p>To-Do Item: {todo.toDoItem}</p>
                   <p>Details: {todo.details}</p>
-                  <p>Deadline: {todo.deadline}</p>
                   <p>CreatedBy: {todo.createdBy}</p>
+                  <p>Deadline: {new Date(todo.deadline).toLocaleDateString()}</p>
                   <p>Priority: {todo.priority}</p>
-                  <p>Repeating: {todo.repeating ? "Yes" : "No"}</p>
+                  <p>Repeating: {String(todo.repeating)}</p>
                   <button className="edit-button" onClick={() => handleEdit(todo._id || todo.id)}>Edit</button>
                 </>
               )}

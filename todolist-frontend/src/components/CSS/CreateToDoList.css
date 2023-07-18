@@ -1,4 +1,5 @@
 .to-do {
+  
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
@@ -72,10 +73,12 @@
   display: flex;
   flex-direction: column;
   max-width: 400px;
-  margin: 10% auto;
+  margin: calc(5% + 10px) auto 0; 
+  margin-bottom: 1%;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
+  
 }
 
 .todo-form label {
@@ -111,9 +114,39 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 8%;
+  margin: calc(5% + 10px) auto 0; 
 }
 
 .logout-button:hover {
   background-color: darkred;
+}
+
+@media (max-width: 768px){
+
+  .todo-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: calc(10% + 30px) auto 0; 
+    margin-bottom: 1%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    
+  }
+
+  .logout-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: calc(13% + 10px) auto 0; 
+  }
+
+
 }

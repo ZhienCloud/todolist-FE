@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './CSS/NavigationToolbar.css';
+import logo from "./CSS/Images/To-Do-List Logo.gif"
 
-const NavigationToolbar = ({ isLoggedIn }) => {
+const NavigationToolbar = () => {
   return (
     <nav className="navbar">
+       <img
+        className="logo"
+        src={logo}
+        alt="To-Do List Logo"
+      />
       <ul>
         <li>
           <Link to="/">Home</Link>
@@ -17,10 +23,11 @@ const NavigationToolbar = ({ isLoggedIn }) => {
               <Link to="/profile">Profile</Link>
             </li> */}
        
-        <li>
+        {/* <li>
           <Link to="/login">Login</Link>
-        </li>
+        </li> */}
       </ul>
+     
     </nav>
   );
 };
