@@ -49,9 +49,7 @@ const CreateToDoList = () => {
 
   const fetchTodoList = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/toDoItems", {
-        params: { createdBy: user._id }
-      });
+      const response = await axios.get(`http://localhost:3000/api/toDoItems/createdBy/${user.id}`);
       if (response && response.status === 200 && response.data) {
         const updatedList = response.data.filter(
           (todo) => !todo.deleted // Exclude the deleted todos
