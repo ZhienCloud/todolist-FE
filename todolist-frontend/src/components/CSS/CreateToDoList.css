@@ -1,5 +1,6 @@
+/* CSS/CreateToDoList.css */
+
 .to-do {
-  
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
@@ -27,14 +28,16 @@
   margin: 5px 0;
 }
 
-.to-do li .edit-button {
+.to-do li button {
   margin-right: 5px;
   padding: 5px 10px;
-  background-color: #337ab7;
-  color: #fff;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.to-do li .edit-button {
+  background-color: #337ab7;
+  color: #fff;
 }
 
 .to-do li .edit-button:hover {
@@ -42,13 +45,8 @@
 }
 
 .to-do li .complete-button {
-  margin-right: 5px;
-  padding: 5px 10px;
   background-color: #5cb85c;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .to-do li .complete-button:hover {
@@ -56,13 +54,8 @@
 }
 
 .to-do li .delete-button {
-  margin-right: 5px;
-  padding: 5px 10px;
   background-color: #d9534f;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .to-do li .delete-button:hover {
@@ -73,12 +66,11 @@
   display: flex;
   flex-direction: column;
   max-width: 400px;
-  margin: calc(5% + 10px) auto 0; 
+  margin: calc(5% + 10px) auto 0;
   margin-bottom: 1%;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
-  
 }
 
 .todo-form label {
@@ -114,39 +106,72 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: calc(5% + 10px) auto 0; 
+  margin: calc(5% + 10px) auto 0;
 }
 
 .logout-button:hover {
   background-color: darkred;
 }
 
-@media (max-width: 768px){
+/* Bootstrap styles for buttons */
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #1f8d39;
+  border-color: #1f8d39;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  color: #fff;
+  background-color: #bd2130;
+  border-color: #bd2130;
+}
+
+@media (max-width: 768px) {
   .todo-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: calc(10% + 30px) auto 0; 
-    margin-bottom: 1%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    
+    margin: calc(10% + 30px) auto 0;
   }
 
   .logout-button {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color: red;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: calc(13% + 10px) auto 0; 
+    margin: calc(13% + 10px) auto 0;
   }
-
-
 }

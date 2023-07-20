@@ -211,7 +211,7 @@ const CreateToDoList = () => {
 />
 
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" className="btn btn-primary" value="Submit" />
       </form>
 
       <div className="to-do">
@@ -236,13 +236,13 @@ const CreateToDoList = () => {
                   <button className="edit-button" onClick={() => handleEdit(todo._id || todo.id)}>Edit</button>
                 </>
               )}
-              <DeleteButton className="delete-button" onClick={() => handleDelete(todo._id || todo.id)} />
-              <CompleteButton className="complete-button" onClick={() => handleComplete(todo._id || todo.id)} />
+             <DeleteButton className="btn btn-danger" onClick={() => handleDelete(todo._id || todo.id)} />
+              <CompleteButton className="btn btn-success" onClick={() => handleComplete(todo._id || todo.id)} />
             </li>
           ))}
         </ul>
       </div>
-      <LogoutButton  />
+      <LogoutButton className="btn btn-danger" />
     </div>
   );
 };
