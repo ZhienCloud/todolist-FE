@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./CSS/CreateToDoList.css";
 import CompleteButton from "./CompleteButton";
 import DeleteButton from "./DeleteButton";
 import EditTodoItem from "./EditTodoItem";
 import LogoutButton from "./LogoutButton";
+
 
 const CreateToDoList = () => {
   const [newTodo, setNewTodo] = useState({
@@ -36,7 +36,7 @@ const CreateToDoList = () => {
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:3000/api/users/info", {
+      const response = await axios.get(process.env.REACT_APP_API_USERS, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -50,7 +50,7 @@ const CreateToDoList = () => {
   const fetchTodoList = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`http://localhost:3000/api/toDoItems/createdBy/${user.id}`,{
+      const response = await axios.get(`${process.env.REACT_APP_API_CREATE}/${user.id}`,{
         headers: {
           Authorization: `Bearer ${token}`
         }});
@@ -81,8 +81,7 @@ const CreateToDoList = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post(
-        "http://localhost:3000/api/toDoItems",
+      const response = await axios.post(process.env.REACT_APP_API_TODOITEMS,
         newTodo,
         {
           headers: {
@@ -105,8 +104,7 @@ const CreateToDoList = () => {
   const handleSave = async (id, updatedTodo) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.patch(
-        `http://localhost:3000/api/toDoItems/${id}`,
+      const response = await axios.patch(`${process.env.REACT_APP_API_TODOITEMS}/${id}`,
         updatedTodo,
         {
           headers: {
@@ -125,7 +123,7 @@ const CreateToDoList = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:3000/api/toDoItems/${id}`, {
+      await axios.delete(`${process.env.REACT_APP_API_TODOITEMS}/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -144,8 +142,7 @@ const CreateToDoList = () => {
   const handleComplete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.delete(
-        `http://localhost:3000/api/toDoItems/${id}`,
+      const response = await axios.delete(`${process.env.REACT_APP_API_TODOITEMS}/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
