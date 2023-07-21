@@ -1,3 +1,4 @@
+/* NavigationToolbar.css */
 .navbar {
   display: flex;
   justify-content: flex-end;
@@ -11,8 +12,15 @@
   z-index: 999;
 }
 
+.navbar ul {
+  list-style: none;
+  margin-right: 1%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
 .navbar li {
-  display: inline-block;
   margin: 0 10px;
 }
 
@@ -26,3 +34,15 @@
   height: auto; /* Maintain aspect ratio */
   margin-right: auto;
 }
+
+.AppName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Take up the full width available */
+  height: auto;
+  margin-left: 5%;
+  text-align: center; /* Center the text horizontally */
+}
+
