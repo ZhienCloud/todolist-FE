@@ -140,9 +140,10 @@ const CreateToDoList = () => {
     
 
   const handleComplete = async (id) => {
+    console.log(id);
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.delete(`${process.env.REACT_APP_API_TODOITEMS}/${id}`,
+      await axios.patch(`${process.env.REACT_APP_API_TODOITEMS_CLOSE}/${id}`, null, 
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -150,15 +151,16 @@ const CreateToDoList = () => {
         }
       );
 
-      if (response.status === 200) {
-        setTodoList(todoList.filter((todo) => todo._id !== id));
-      } else {
-        console.log("Failed to delete the item.");
-      }
+
+
+      setTodoList((prevTodoList) =>
+        prevTodoList.filter((todo) => todo._id !== id)
+      );
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   const handleCancel = () => {
     setEditingTodoId(null);
@@ -236,7 +238,7 @@ const CreateToDoList = () => {
                   <button className="edit-button" onClick={() => handleEdit(todo._id || todo.id)}>Edit</button>
                 </>
               )}
-             <DeleteButton className="btn btn-danger" onClick={() => handleDelete(todo._id || todo.id)} />
+              <DeleteButton className="btn btn-danger" onClick={() => handleDelete(todo._id || todo.id)} />
               <CompleteButton className="btn btn-success" onClick={() => handleComplete(todo._id || todo.id)} />
             </li>
           ))}
