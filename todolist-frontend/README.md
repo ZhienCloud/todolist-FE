@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+ToDoList App
+This is a simple ToDoList app built using React.js for managing your tasks and to-do items. The app allows you to add, edit, complete, and delete tasks. It also supports setting priorities and deadlines for each task.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+Add new tasks with a title, details, deadline, and priority.
+Edit existing tasks to update their details and properties.
+Mark tasks as completed and view completed tasks separately.
+Delete tasks permanently or temporarily (soft delete).
+Responsive design for mobile and desktop screens.
+User authentication and authorization to secure user data.
+Repeating tasks for recurring tasks.
+Logout button to sign out from the app.
+Technologies Used
+React.js
+Axios for handling API requests
+Node.js for the backend (not shown in this repository)
+MongoDB for the database (not shown in this repository)
+Bootstrap for styling
+Getting Started
+Clone the repository to your local machine using git clone <repository-url>.
+Navigate to the project directory: cd ToDoList.
+Install the required dependencies: npm install.
+Start the development server: npm start.
+Open your web browser and visit http://localhost:3000 to see the app running.
+Usage
+Once the app is running, you can create a new task by filling in the required details in the form and clicking the "Submit" button.
+To edit a task, click the "Edit" button next to the task you want to modify. Make the necessary changes and click the "Save" button to update the task.
+To mark a task as completed, click the "Complete" button next to the task. The completed tasks will be moved to a separate section.
+To delete a task, click the "Delete" button next to the task. This will either permanently delete the task or move it to a trash section, depending on the app's implementation.
+Use the "Logout" button to sign out of the app and protect your data.
+Contributing
+Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to create a pull request or open an issue in the repository.
 
-## Available Scripts
 
-In the project directory, you can run:
+Future Development
+To integrate a profile with your task
+To assign task to certain users
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Acknowledgments
+Thanks to the developers of React, Axios, Bootstrap, and other open-source libraries that made building this ToDoList app easier.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

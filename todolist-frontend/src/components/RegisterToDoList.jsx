@@ -20,7 +20,7 @@ export default function Register() {
     if (Object.keys(validationErrors).length === 0) {
       // form is valid, proceed with submission
       axios
-        .post('http://localhost:3000/api/users/register', formData)
+        .post(process.env.REACT_APP_API_REGISTER, formData)
         .then((response) => {
           navigate('/login');
           // perform further actions after successful registration
